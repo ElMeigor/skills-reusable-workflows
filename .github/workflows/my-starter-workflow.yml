@@ -13,6 +13,9 @@ jobs:
       - name: Run a multi-line script
         run: |
           call-reusable-workflow:
-          uses: ./.github/workflows/reusable-workflow.yml
-          with:
-            node: 14
+            strategy:
+              matrix:
+                nodeversion: [14, 16, 18, 20]
+            uses: ./.github/workflows/reusable-workflow.yml
+            with:
+              node: ${{ matrix.nodeversion }}
